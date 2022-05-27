@@ -19,16 +19,16 @@
 
 
 //the arguments fed to the dpdk initialization
-static char dpdk_arg0[] = "zzz";	//this should actually be the program name I guess, but ah well
-static char dpdk_arg1[] = "-c";
-static char dpdk_arg2[30];
+// static char dpdk_arg0[] = "zzz";	//this should actually be the program name I guess, but ah well
+// static char dpdk_arg1[] = "-c";
+// static char dpdk_arg2[30];
 
-#ifdef NDP_BUILDING_FOR_XEN
-	static char dpdk_arg3[] = "--xen-dom0";
-	static char *dpdk_argv[] = { dpdk_arg0, dpdk_arg1, dpdk_arg2, dpdk_arg3 };
-#else
-	static char *dpdk_argv[] = { dpdk_arg0, dpdk_arg1, dpdk_arg2 };
-#endif
+// #ifdef NDP_BUILDING_FOR_XEN
+// 	static char dpdk_arg3[] = "--xen-dom0";
+// 	static char *dpdk_argv[] = { dpdk_arg0, dpdk_arg1, dpdk_arg2, dpdk_arg3 };
+// #else
+// 	static char *dpdk_argv[] = { dpdk_arg0, dpdk_arg1, dpdk_arg2 };
+// #endif
 
 /*
 static void enable_strict_prio_for_tc(uint8_t port, uint8_t tc)
@@ -48,9 +48,21 @@ static void enable_strict_prio_for_tc(uint8_t port, uint8_t tc)
 */
 
 
-int init_dpdk(void)
+int init_dpdk(char **argv)
 {
 	static_assert(CORE_MASK_VALUE < 64, "CORE_MASK_VALUE too large");
+
+	char dpdk_arg0[] = "zzz";	//this should actually be the program name I guess, but ah well
+    char dpdk_arg1[] = "-c";
+    char dpdk_arg2[30];
+    // char dpdk_arg4[] = "--vdev=eth_af_packet0,iface=h1-eth0,qpairs=16";
+	char dpdk_arg4[20];
+	char dpdk_arg5[20];
+
+    strcpy(dpdk_arg4, argv[2]);
+	strcpy(dpdk_arg5, argv[3]);
+	char *dpdk_argv[] = { dpdk_arg0, dpdk_arg1, dpdk_arg2,  dpdk_arg4, dpdk_arg5};
+
 	sprintf(dpdk_arg2, "%d", CORE_MASK_VALUE);
 
 	core.dpdk_port_id = 0;

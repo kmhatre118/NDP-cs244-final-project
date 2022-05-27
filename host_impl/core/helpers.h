@@ -12,7 +12,7 @@
 
 
 int init_pre_dpdk(int argc, char ** argv);		//init.c
-int init_dpdk(void);							//init_dpdk.c
+int init_dpdk(char **argv);						//init_dpdk.c
 
 void check_global_comm_ring(void);				//global_comm.c
 void check_comm_rings(void); 					//comm.c

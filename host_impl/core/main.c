@@ -46,7 +46,11 @@ int main(int argc, char ** argv)
 	if(init_pre_dpdk(argc, argv))
 		exit(1);
 
-	if(init_dpdk())
+	if (argc < 4) {
+		printf("Must initialize dpdk with arguments --file-prefix=<huge page file prefix> --socket-mem=<memory amount>");
+		exit(1);
+	}
+	if(init_dpdk(argv))
 		exit(1);
 
 	#if NDP_CORE_SEPARATE_LCORE_FOR_PULLQ
