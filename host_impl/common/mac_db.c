@@ -35,8 +35,8 @@ static const struct computer_mac_info gaina_mac_info [] =
 static const struct computer_mac_info cocos_mac_info [] =
 {
 		{0 , 2, { MAC6(a0, 36, 9f, 5f, db, c0), MAC6(a0, 36, 9f, 5f, db, c1)} },
-		{1 , 2, { MAC6(a0, 36, 9f, 5f, db, d0), MAC6(a0, 36, 9f, 5f, db, d1)} },
-		{2 , 2, { MAC6(a0, 36, 9f, 5f, dd, 34), MAC6(a0, 36, 9f, 5f, dd, 35)} },
+		{1 , 2, { MAC6(08, 00, 27, 30, 65, 8d), MAC6(a0, 36, 9f, 5f, db, d1)} },
+		{2 , 2, { MAC6(08, 00, 27, ec, e4, 44), MAC6(a0, 36, 9f, 5f, dd, 35)} },
 		{3 , 2, { MAC6(a0, 36, 9f, 5c, 5a, ac), MAC6(a0, 36, 9f, 5c, 5a, ad)} },
 		{4 , 2, { MAC6(a0, 36, 9f, 5c, 52, f0), MAC6(a0, 36, 9f, 5c, 52, f1)} },
 		{5 , 2, { MAC6(a0, 36, 9f, 5f, dc, c8), MAC6(a0, 36, 9f, 5f, dc, c9)} },

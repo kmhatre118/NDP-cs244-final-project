@@ -56,8 +56,8 @@ int init_dpdk(void)
 	core.dpdk_port_id = 0;
 
 	//I think 128 are required to use the port in DCB mode
-	core.dpdk_num_rx_queues = 128;
-	core.dpdk_num_tx_queues = 128;
+	core.dpdk_num_rx_queues = 1;
+	core.dpdk_num_tx_queues = 1;
 
 	core.dpdk_default_queue_id = 0;
 	core.dpdk_pull_tx_queue_id = 64;
@@ -108,12 +108,18 @@ int init_dpdk(void)
 	#if   NDP_MTU == 9000
 	    .rxmode = { .mq_mode = ETH_MQ_RX_DCB, .max_rx_pkt_len = 9100, .jumbo_frame = 1 },
 	#elif NDP_MTU == 1500
-	    .rxmode = { .mq_mode = ETH_MQ_RX_DCB, .max_rx_pkt_len = ETHER_MAX_LEN },
+	    .rxmode = { .mq_mode = ETH_MQ_RX_NONE, .max_rx_pkt_len = ETHER_MAX_LEN },
     #endif
 	    .rx_adv_conf = { .dcb_rx_conf = { .nb_tcs = ETH_4_TCS} },
-	    .txmode = { .mq_mode = ETH_MQ_TX_DCB },
+	    .txmode = { .mq_mode = ETH_MQ_TX_NONE },
 		.tx_adv_conf = { .dcb_tx_conf = { .nb_tcs = ETH_4_TCS} }
 	};
+
+/*	struct rte_eth_conf port_conf = 
+	{
+		.rxmode = { .mq_mode = ETH_MQ_RX_DCB, .max_rx_pkt_len = ETHER_MAX_LEN},
+		.txmode = { .mq_mode = ETH_MQ_TX_DCB}
+	};*/
 
 	LOG_FMSG(LOGLVL10, "rte_eth_dev_count() = %u", rte_eth_dev_count());
 

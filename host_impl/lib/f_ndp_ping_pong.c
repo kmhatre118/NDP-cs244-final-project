@@ -156,7 +156,7 @@ int f_ndp_ping_pong(int argc, char ** argv)
 			for(int i = 0; i < client_sends; i++)
 				buf1[i] = 0;
 		#endif
-
+		printf("about to listen on port: %d\n", 1000 + id/2);
 		int S = ndp_listen(1000 + id / 2, 10);
 
 		printf("listening; socket = %d\n", S);
@@ -166,15 +166,17 @@ int f_ndp_ping_pong(int argc, char ** argv)
 		while(keep_running)
 		{
 			//keep_running = 0;
-
+			
+			printf("in while keep running loop");
 			int s = ndp_accept(S, 0);
+			printf("accepted connection");
 
 			n1 = ndp_recv_all(s, buf1, client_sends);
-
+			printf("recieved all");
 			//uint64_t t4 = lib_read_tsc();
 
 			n2 = ndp_send_all(s, buf2, server_sends);
-
+			printf("sent all");
 			if(n1 != client_sends || n2 != server_sends)
 			{
 				printf("n1 || n2 error\n");
