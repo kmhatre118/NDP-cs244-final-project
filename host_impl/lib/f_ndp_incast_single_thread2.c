@@ -88,7 +88,7 @@ static int master_function(int argc, char ** argv)
 	{
 		ndp_cycle_count_t t1 = ndp_rdtsc();
 
-		connect_socks[i] =  ndp_connect(worker_ips[i], WORKER_SERVER_PORT + i);
+		connect_socks[i] =  ndp_connect(worker_ips[i], WORKER_SERVER_PORT + i + 1);
 		if(UNLIKELY (connect_socks[i]) < 0)
 			exit_msg(1, "master connect_socks < 0");
 
