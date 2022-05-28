@@ -47,6 +47,7 @@ static int master_function(int argc, char ** argv)
 	int i;
 	int num_workers = 0;
 
+	// make sure worker ips are input in the same order as ids are assigned
 	if (argc < 4)
 		exit_msg(1, "0 <reply_size> <workers ...>");
 
@@ -87,7 +88,7 @@ static int master_function(int argc, char ** argv)
 	{
 		ndp_cycle_count_t t1 = ndp_rdtsc();
 
-		connect_socks[i] =  ndp_connect(worker_ips[i], WORKER_SERVER_PORT);
+		connect_socks[i] =  ndp_connect(worker_ips[i], WORKER_SERVER_PORT + i);
 		if(UNLIKELY (connect_socks[i]) < 0)
 			exit_msg(1, "master connect_socks < 0");
 
@@ -173,7 +174,9 @@ static int worker_function(int argc, char ** argv)
 	if(ndp_init())
 		exit_msg(1, "ndp_init failed");
 
-	int listenfd = ndp_listen(WORKER_SERVER_PORT, 10);
+	int id = atoi(argv[1]);
+
+	int listenfd = ndp_listen(WORKER_SERVER_PORT + id, 10);
 
 	if(UNLIKELY (listenfd < 0))
 		exit_msg(1, "listen error");

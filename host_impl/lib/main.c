@@ -81,7 +81,7 @@ int main(int argc, char ** argv)
 
 	int result = -1;
 
-	result = f_ndp_ping_pong(argc, argv);
+	result = f_ndp_incast_single_thread2(argc, argv);
 
 	//result = f_ndp_incast(argc, argv);
 	//result = f_ndp_incast_single_thread(argc, argv);
