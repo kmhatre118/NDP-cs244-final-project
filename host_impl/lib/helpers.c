@@ -142,6 +142,7 @@ int set_mac_addrs(struct lib_socket_descriptor *d)
 			return -1;
 		if(get_mac_address(t->remote_addr, s->remote_mac, lib.local_addr))
 			return -2;
+		printf("got mac addrs local: %s, remote %s\n", s->local_mac, s->remote_mac);
 	#else
 		if(get_mac_address(t->local_addr, s->local_mac))
 			return -1;

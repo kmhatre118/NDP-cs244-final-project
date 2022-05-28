@@ -87,7 +87,7 @@ static int master_function(int argc, char ** argv)
 	for(i = 0; i < num_workers; i++)
 	{
 		ndp_cycle_count_t t1 = ndp_rdtsc();
-
+		printf("adding a connected socket for %s on port %d\n", worker_ips[i], WORKER_SERVER_PORT + 1);
 		connect_socks[i] =  ndp_connect(worker_ips[i], WORKER_SERVER_PORT + i + 1);
 		if(UNLIKELY (connect_socks[i]) < 0)
 			exit_msg(1, "master connect_socks < 0");
@@ -103,6 +103,7 @@ static int master_function(int argc, char ** argv)
 	{
 		//TODO ndp_send is still blocking; this work only as long as we send less data than the sum of tx_buf sizes,
 		//which should be the case here, because we're just sending a number
+		printf("master fxn sending reply size to all workers\n");
 		n = ndp_send_all(connect_socks[i], (char*)&reply_size_for[i], sizeof(reply_size_for[i]));
 		if(UNLIKELY (n != sizeof(reply_size_for[i])))
 			exit_msg(1, "n1 != sizeof(reply_size)");
@@ -118,8 +119,9 @@ static int master_function(int argc, char ** argv)
 				continue;
 
 			char *buf = bufs[i];
-
+			printf("master trying to recieve from worker %d", i + 1);
 			n = ndp_recv(connect_socks[i], buf, BUF_SIZE, NDP_RECV_DONT_BLOCK);
+			printf("recieved");
 
 			rcvd[i] += n;
 
@@ -175,7 +177,7 @@ static int worker_function(int argc, char ** argv)
 		exit_msg(1, "ndp_init failed");
 
 	int id = atoi(argv[1]);
-
+	printf("worker started listening on port %d", WORKER_SERVER_PORT + id);
 	int listenfd = ndp_listen(WORKER_SERVER_PORT + id, 10);
 
 	if(UNLIKELY (listenfd < 0))
@@ -191,8 +193,9 @@ static int worker_function(int argc, char ** argv)
 		buf[i] = i;
 
 	memset(&lctrs, 0, sizeof(struct lib_stupid_counters));
-
+	printf("worker %d accepting connections", id);
 	int sock = ndp_accept(listenfd, 0);
+	printf("worker %d accepted connection", id);
 
 	//printf("accept returned!\n");
 
