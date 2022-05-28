@@ -284,8 +284,8 @@ static inline int get_mac_address_aux(ndp_net_addr_t ip, void *buf)
 			switch(computer_idx)
 			{
 				case 20 - 1 : interface_idx = 0; break;
-				case 9 - 1 : interface_idx = 1; break;
-				case 19 - 1: interface_idx = 2; break;
+				case 7 - 1 : interface_idx = 1; break;
+				case 5 - 1: interface_idx = 1; break;
 				case 8 - 1: interface_idx = 3; break;
 				default: interface_idx = -1; break;
 			}
@@ -300,7 +300,7 @@ static inline int get_mac_address_aux(ndp_net_addr_t ip, void *buf)
 		#if   NDP_CURRENT_TEST_ENVIRONMENT == ENV_GAINA
 			return gaina_get_mac(1, interface_idx, buf);
 		#elif NDP_CURRENT_TEST_ENVIRONMENT == ENV_COCOS
-			return cocos_get_mac(9, interface_idx, buf);
+			return cocos_get_mac(computer_idx, interface_idx, buf);
 		#endif
 
 		return -1;
