@@ -119,9 +119,7 @@ static int master_function(int argc, char ** argv)
 				continue;
 
 			char *buf = bufs[i];
-			printf("master trying to recieve from worker %d", i + 1);
 			n = ndp_recv(connect_socks[i], buf, BUF_SIZE, NDP_RECV_DONT_BLOCK);
-			printf("recieved");
 
 			rcvd[i] += n;
 
@@ -207,6 +205,7 @@ static int worker_function(int argc, char ** argv)
 
 	n = ndp_recv_all(sock, (char*)&reply_size, sizeof(reply_size));
 	//printf("rcvd all!\n");
+	printf("recieved all reply size of %d\n", reply_size);
 
 	if(UNLIKELY (n != sizeof(reply_size)))
 		exit_msg(1, "recv_all n1 != sizeof(x)");
