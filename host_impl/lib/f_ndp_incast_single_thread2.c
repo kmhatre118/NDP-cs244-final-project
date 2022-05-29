@@ -205,7 +205,7 @@ static int worker_function(int argc, char ** argv)
 
 	n = ndp_recv_all(sock, (char*)&reply_size, sizeof(reply_size));
 	//printf("rcvd all!\n");
-	printf("recieved all reply size of %d\n", reply_size);
+	printf("recieved all reply size of %zu\n", reply_size);
 
 	if(UNLIKELY (n != sizeof(reply_size)))
 		exit_msg(1, "recv_all n1 != sizeof(x)");
