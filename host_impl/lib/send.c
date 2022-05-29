@@ -125,6 +125,7 @@ ssize_t ndp_send(int sock, const void *src, size_t len, int flags)
 			pb->hdr.ip.tot_len = htons(lib.instance_info.shm_params.packet_buffer_mtu - pb->bytes_left);
 			pb->timeout_ref = 0; //special meaning for timeout thread; kinda clunky though
 								 //why was it necessary?
+			pb->hdr.ndp |= NDP_HEADER_FLAG_ROUTE;
 
 			/*would this still be necessary if the assignment is moved after the following "while" ?
 			... I would guess not, because the condition involves a function call, but I'm not sure

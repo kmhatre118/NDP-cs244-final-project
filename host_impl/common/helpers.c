@@ -286,8 +286,8 @@ static inline int get_mac_address_aux(ndp_net_addr_t ip, void *buf)
 				case 20 - 1 : interface_idx = 0; break;
 				case 7 - 1 : interface_idx = 1; break;
 				case 5 - 1: interface_idx = 1; break;
-				case 8 - 1: interface_idx = 3; break;
-				default: interface_idx = -1; break;
+				case 8 - 1: interface_idx = 1; break;
+				default: interface_idx = 1; break;
 			}
 			//interface_idx = computer_idx - 5;
 		#endif

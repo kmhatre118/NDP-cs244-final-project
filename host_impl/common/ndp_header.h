@@ -20,7 +20,7 @@ typedef uint16_t ndp_header_flags_t;
 #define NDP_HEADER_FLAG_FIN								(1 << 6)
 #define NDP_HEADER_FLAG_CHOPPED							(1 << 7)
 #define NDP_HEADER_FLAG_SYN								(1 << 8)
-
+#define NDP_HEADER_FLAG_ROUTE							(1 << 9)
 
 typedef uint16_t ndp_checksum_t;
 

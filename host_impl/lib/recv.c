@@ -143,7 +143,7 @@ ssize_t ndp_recv(int sock, void *dst, size_t len, int flags)
 		}
 
 		memcpy((char*)dst + result, b->payload + off, sz);
-
+		printf("recieved flag: %u\n", b->hdr.ndp & NDP_HEADER_FLAG_ROUTE);
 		len -= sz;
 		result += sz;
 
