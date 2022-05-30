@@ -54,12 +54,12 @@ int init_dpdk(char **argv)
 
 	char dpdk_arg0[] = "zzz";	//this should actually be the program name I guess, but ah well
     char dpdk_arg1[] = "-c";
-	char dpdk_arg6[] = "-w"
+	char dpdk_arg6[] = "-w";
     char dpdk_arg2[30];
     // char dpdk_arg4[] = "--vdev=eth_af_packet0,iface=h1-eth0,qpairs=16";
 	char dpdk_arg4[20];
 	char dpdk_arg5[20];
-	cahr dpdk_arg7[10];
+	char dpdk_arg7[10];
 
     strcpy(dpdk_arg4, argv[3]);
 	strcpy(dpdk_arg5, argv[4]);
