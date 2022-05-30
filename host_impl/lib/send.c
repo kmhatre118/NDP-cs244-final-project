@@ -5,6 +5,7 @@
 #include "hoover_ndp.h"
 #include "timeout.h"
 
+static uint32_t IP_MAX = 1<<24;
 
 ssize_t ndp_send(int sock, const void *src, size_t len, int flags)
 {
@@ -126,8 +127,9 @@ ssize_t ndp_send(int sock, const void *src, size_t len, int flags)
 			pb->timeout_ref = 0; //special meaning for timeout thread; kinda clunky though
 								 //why was it necessary?
 			if (rand() % 2) {
-				pb->hdr.ndp.flags |= NDP_HEADER_FLAG_ROUTE;
+				printf("masked ip is: %08" PRIx32 "\n" pb->hdr.ndp.flags | IP_MASK);
 			}
+
 			/*would this still be necessary if the assignment is moved after the following "while" ?
 			... I would guess not, because the condition involves a function call, but I'm not sure
 			... then again, what if I use a MACRO or inline function instead of a regular function ?
