@@ -46,8 +46,8 @@ int main(int argc, char ** argv)
 	if(init_pre_dpdk(argc, argv))
 		exit(1);
 
-	if (argc < 4) {
-		printf("Must initialize dpdk with arguments --file-prefix=<huge page file prefix> --socket-mem=<memory amount>");
+	if (argc < 6) {
+		printf("Must initialize dpdk with arguments <coremask> --file-prefix=<huge page file prefix> --socket-mem=<memory amount> <pci bus>");
 		exit(1);
 	}
 	if(init_dpdk(argv))
