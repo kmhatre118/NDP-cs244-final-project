@@ -103,7 +103,7 @@ static int master_function(int argc, char ** argv)
 	{
 		//TODO ndp_send is still blocking; this work only as long as we send less data than the sum of tx_buf sizes,
 		//which should be the case here, because we're just sending a number
-		printf("master fxn sending reply size to all workers\n");
+//		printf("master fxn sending reply size to all workers\n");
 		n = ndp_send_all(connect_socks[i], (char*)&reply_size_for[i], sizeof(reply_size_for[i]));
 		if(UNLIKELY (n != sizeof(reply_size_for[i])))
 			exit_msg(1, "n1 != sizeof(reply_size)");
@@ -175,7 +175,7 @@ static int worker_function(int argc, char ** argv)
 		exit_msg(1, "ndp_init failed");
 
 	int id = atoi(argv[1]);
-	printf("worker started listening on port %d", WORKER_SERVER_PORT + id);
+//	printf("worker started listening on port %d", WORKER_SERVER_PORT + id);
 	int listenfd = ndp_listen(WORKER_SERVER_PORT + id, 10);
 
 	if(UNLIKELY (listenfd < 0))
@@ -191,9 +191,9 @@ static int worker_function(int argc, char ** argv)
 		buf[i] = i;
 
 	memset(&lctrs, 0, sizeof(struct lib_stupid_counters));
-	printf("worker %d accepting connections", id);
+//	printf("worker %d accepting connections", id);
 	int sock = ndp_accept(listenfd, 0);
-	printf("worker %d accepted connection", id);
+//	printf("worker %d accepted connection", id);
 
 	//printf("accept returned!\n");
 
@@ -205,7 +205,7 @@ static int worker_function(int argc, char ** argv)
 
 	n = ndp_recv_all(sock, (char*)&reply_size, sizeof(reply_size));
 	//printf("rcvd all!\n");
-	printf("recieved all reply size of %zu\n", reply_size);
+//	printf("recieved all reply size of %zu\n", reply_size);
 
 	if(UNLIKELY (n != sizeof(reply_size)))
 		exit_msg(1, "recv_all n1 != sizeof(x)");
