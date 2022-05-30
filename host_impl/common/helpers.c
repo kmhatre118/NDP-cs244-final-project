@@ -269,6 +269,8 @@ static inline int get_mac_address_aux(ndp_net_addr_t ip, void *buf)
 #endif
 {
 	#if NDP_HARDCODED_SAME_NEXT_HOP
+		char *x = (char*)&local_addr;
+		// char *y = (char*)&ip;
 		if(ip == local_addr)
 			return get_mac_address_aux(ip, buf);
 		printf("getting next hop mac address \n)");
