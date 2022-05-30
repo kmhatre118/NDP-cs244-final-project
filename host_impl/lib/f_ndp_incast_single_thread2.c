@@ -14,7 +14,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
-
+#include <time.h>
 
 
 #define MAX_NUM_WORKERS 	8
@@ -263,7 +263,7 @@ int f_ndp_incast_single_thread2(int argc, char **argv)
 	cpu_set_t mask;
 	pthread_t zzz_thread;
 	pthread_attr_t zzz_thread_attr;
-
+	srand(time(NULL));
 	CPU_ZERO(&mask);
 	pthread_attr_init(&zzz_thread_attr);
 	CPU_SET(3, &mask);
