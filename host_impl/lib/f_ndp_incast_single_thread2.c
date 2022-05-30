@@ -87,7 +87,6 @@ static int master_function(int argc, char ** argv)
 	for(i = 0; i < num_workers; i++)
 	{
 		ndp_cycle_count_t t1 = ndp_rdtsc();
-		printf("adding a connected socket for %s on port %d\n", worker_ips[i], WORKER_SERVER_PORT + 1);
 		connect_socks[i] =  ndp_connect(worker_ips[i], WORKER_SERVER_PORT + i + 1);
 		if(UNLIKELY (connect_socks[i]) < 0)
 			exit_msg(1, "master connect_socks < 0");

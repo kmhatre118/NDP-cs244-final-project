@@ -273,9 +273,7 @@ static inline int get_mac_address_aux(ndp_net_addr_t ip, void *buf)
 		// char *y = (char*)&ip;
 		if(ip == local_addr)
 			return get_mac_address_aux(ip, buf);
-		printf("getting next hop mac address \n)");
 		int computer_idx = x[3] - 1;
-		printf("computer idx is %d\n", computer_idx);
 		int interface_idx = -1;
 
 		#if   NDP_CURRENT_TEST_ENVIRONMENT == ENV_GAINA
