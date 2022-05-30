@@ -269,11 +269,11 @@ static inline int get_mac_address_aux(ndp_net_addr_t ip, void *buf)
 #endif
 {
 	#if NDP_HARDCODED_SAME_NEXT_HOP
-
-		if(ip == local_addr)
+		char *x = (char*)&local_addr;
+		char *y = (char*)&ip;
+		if(x[3] == y[3])
 			return get_mac_address_aux(ip, buf);
 		printf("getting next hop mac address \n)");
-		char *x = (char*)&local_addr;
 		int computer_idx = x[3] - 1;
 		printf("computer idx is %d\n", computer_idx);
 		int interface_idx = -1;
