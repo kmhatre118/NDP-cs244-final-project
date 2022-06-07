@@ -1,0 +1,177 @@
+{
+  "target": "bmv2",
+  "p4info": "build/ndp-tree.p4.p4info.txt",
+  "bmv2_json": "build/ndp-tree.json",
+  "table_entries": [
+    {
+      "table": "ipv4_lpm",
+      "match": {
+        "ipv4.dstAddr": ["10.10.10.7", 32]
+      },
+      "action_name": "set_nhop",
+      "action_params": {
+        "nhop_ipv4": "10.10.10.7",
+	"port": 1
+      }
+    },
+    {
+      "table": "ipv4_lpm",
+      "match": {
+        "ipv4.dstAddr": ["11.10.10.7", 32]
+      },
+      "action_name": "set_nhop",
+      "action_params": {
+        "nhop_ipv4": "11.10.10.7",
+        "port": 1
+      }
+    },
+    {
+      "table": "ipv4_lpm",
+      "match": {
+        "ipv4.dstAddr": ["10.10.11.5", 32]
+      },
+      "action_name": "set_nhop",
+      "action_params": {
+        "nhop_ipv4": "10.10.11.5",
+	"port": 2
+      }
+    },
+    {
+      "table": "ipv4_lpm",
+      "match": {
+        "ipv4.dstAddr": ["11.10.11.5", 32]
+      },
+      "action_name": "set_nhop",
+      "action_params": {
+        "nhop_ipv4": "11.10.11.5",
+        "port": 2
+      }
+    },
+    {
+      "table": "ipv4_lpm",
+      "match": {
+        "ipv4.dstAddr": ["10.10.13.8", 32]
+      },
+      "action_name": "set_nhop",
+      "action_params": {
+        "nhop_ipv4": "10.10.13.8",
+        "port": 1
+      }
+    },
+    {
+      "table": "ipv4_lpm",
+      "match": {
+        "ipv4.dstAddr": ["11.10.13.8", 32]
+      },
+      "action_name": "set_nhop",
+      "action_params": {
+        "nhop_ipv4": "11.10.13.8",
+        "port": 1
+      }
+    },
+    {
+      "table": "forward",
+      "match": {
+        "routing_metadata.nhop_ipv4": "10.10.10.7"
+      },
+      "action_name": "set_dmac",
+      "action_params": {
+        "dmac": "08:00:27:3a:d8:f4",
+	"smac": "08:00:27:d1:7d:9e"
+      }
+    },
+    {
+      "table": "forward",
+      "match": {
+        "routing_metadata.nhop_ipv4": "11.10.10.7"
+      },
+      "action_name": "set_dmac",
+      "action_params": {
+        "dmac": "08:00:27:3a:d8:f4",
+        "smac": "08:00:27:d1:7d:9e"
+      }
+    },
+    {
+      "table": "forward",
+      "match": {
+        "routing_metadata.nhop_ipv4": "10.10.13.8"
+      },
+      "action_name": "set_dmac",
+      "action_params": {
+        "dmac": "08:00:27:45:f7:13",
+        "smac": "08:00:27:d1:7d:9e"
+      }
+    },
+    {
+      "table": "forward",
+      "match": {
+        "routing_metadata.nhop_ipv4": "11.10.13.8"
+      },
+      "action_name": "set_dmac",
+      "action_params": {
+        "dmac": "08:00:27:45:f7:13",
+        "smac": "08:00:27:d1:7d:9e"
+      }
+    },
+    {
+      "table": "forward",
+      "match": {
+        "routing_metadata.nhop_ipv4": "10.10.11.5"
+      },
+      "action_name": "set_dmac",
+      "action_params": {
+        "dmac": "08:00:27:45:f7:13",
+        "smac": "08:00:27:d1:7d:9e"
+      }
+    },
+    {
+      "table": "forward",
+      "match": {
+        "routing_metadata.nhop_ipv4": "11.10.11.5"
+      },
+      "action_name": "set_dmac",
+      "action_params": {
+        "dmac": "08:00:27:45:f7:13",
+        "smac": "08:00:27:d1:7d:9e"
+      }
+    },
+    {
+      "table": "directtoprio",
+      "default_action": true,
+      "action_name": "directpriohigh",
+      "action_params": { }
+    },
+    {
+      "table": "readbuffersense",
+      "default_action": true,
+      "action_name": "readbuffer",
+      "action_params": { }
+    },  {
+      "table": "setprio",
+      "match": {
+              "meta.register_tmp": [8,8]
+      },
+      "priority": 1,
+      "action_name": "setpriohigh",
+      "action_params": { }
+    },
+    {
+      "table": "setprio",
+      "match": {
+              "meta.register_tmp": [0, 7]
+      },
+      "priority": 1,
+      "action_name": "setpriolow",
+      "action_params": { }
+    },
+    {
+      "table": "dec_counter",
+      "match": {
+        "standard_metadata.priority": [1, 1]
+      },
+      "priority": 1,
+      "action_name": "decreasereg",
+      "action_params": {}
+    }
+  ]
+}

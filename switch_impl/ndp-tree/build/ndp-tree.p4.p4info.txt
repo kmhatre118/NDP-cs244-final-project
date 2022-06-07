@@ -1,0 +1,292 @@
+pkg_info {
+  arch: "v1model"
+}
+tables {
+  preamble {
+    id: 49154760
+    name: "directtoprio"
+    alias: "directtoprio"
+  }
+  match_fields {
+    id: 1
+    name: "meta.register_tmp"
+    bitwidth: 16
+    match_type: RANGE
+  }
+  action_refs {
+    id: 20462738
+  }
+  action_refs {
+    id: 21257015
+    annotations: "@defaultonly"
+    scope: DEFAULT_ONLY
+  }
+  size: 2
+}
+tables {
+  preamble {
+    id: 49645444
+    name: "forward"
+    alias: "forward"
+  }
+  match_fields {
+    id: 1
+    name: "routing_metadata.nhop_ipv4"
+    bitwidth: 32
+    match_type: EXACT
+  }
+  action_refs {
+    id: 25234447
+  }
+  action_refs {
+    id: 19143480
+  }
+  action_refs {
+    id: 21257015
+    annotations: "@defaultonly"
+    scope: DEFAULT_ONLY
+  }
+  size: 512
+}
+tables {
+  preamble {
+    id: 34892705
+    name: "ipv4_lpm"
+    alias: "ipv4_lpm"
+  }
+  match_fields {
+    id: 1
+    name: "ipv4.dstAddr"
+    bitwidth: 32
+    match_type: LPM
+  }
+  action_refs {
+    id: 23300268
+  }
+  action_refs {
+    id: 19143480
+  }
+  action_refs {
+    id: 21257015
+    annotations: "@defaultonly"
+    scope: DEFAULT_ONLY
+  }
+  size: 1024
+}
+tables {
+  preamble {
+    id: 46894171
+    name: "readbuffersense"
+    alias: "readbuffersense"
+  }
+  match_fields {
+    id: 1
+    name: "meta.register_tmp"
+    bitwidth: 16
+    match_type: RANGE
+  }
+  action_refs {
+    id: 30379233
+  }
+  action_refs {
+    id: 21257015
+    annotations: "@defaultonly"
+    scope: DEFAULT_ONLY
+  }
+  size: 2
+}
+tables {
+  preamble {
+    id: 33949982
+    name: "setprio"
+    alias: "setprio"
+  }
+  match_fields {
+    id: 1
+    name: "meta.register_tmp"
+    bitwidth: 16
+    match_type: RANGE
+  }
+  action_refs {
+    id: 28066193
+  }
+  action_refs {
+    id: 23687164
+  }
+  action_refs {
+    id: 21257015
+    annotations: "@defaultonly"
+    scope: DEFAULT_ONLY
+  }
+  size: 2
+}
+tables {
+  preamble {
+    id: 37578832
+    name: "dec_counter"
+    alias: "dec_counter"
+  }
+  match_fields {
+    id: 1
+    name: "standard_metadata.priority"
+    bitwidth: 3
+    match_type: RANGE
+  }
+  action_refs {
+    id: 21167566
+  }
+  action_refs {
+    id: 31479387
+  }
+  action_refs {
+    id: 21257015
+    annotations: "@defaultonly"
+    scope: DEFAULT_ONLY
+  }
+  size: 2
+}
+tables {
+  preamble {
+    id: 43851978
+    name: "send_frame"
+    alias: "send_frame"
+  }
+  match_fields {
+    id: 1
+    name: "standard_metadata.egress_port"
+    bitwidth: 9
+    match_type: EXACT
+  }
+  action_refs {
+    id: 31165400
+  }
+  action_refs {
+    id: 19143480
+  }
+  action_refs {
+    id: 21257015
+    annotations: "@defaultonly"
+    scope: DEFAULT_ONLY
+  }
+  size: 256
+}
+actions {
+  preamble {
+    id: 21257015
+    name: "NoAction"
+    alias: "NoAction"
+    annotations: "@noWarn(\"unused\")"
+  }
+}
+actions {
+  preamble {
+    id: 20462738
+    name: "directpriohigh"
+    alias: "directpriohigh"
+  }
+}
+actions {
+  preamble {
+    id: 25234447
+    name: "set_dmac"
+    alias: "set_dmac"
+  }
+  params {
+    id: 1
+    name: "dmac"
+    bitwidth: 48
+  }
+  params {
+    id: 2
+    name: "smac"
+    bitwidth: 48
+  }
+}
+actions {
+  preamble {
+    id: 19143480
+    name: "_drop"
+    alias: "_drop"
+  }
+}
+actions {
+  preamble {
+    id: 23300268
+    name: "set_nhop"
+    alias: "set_nhop"
+  }
+  params {
+    id: 1
+    name: "nhop_ipv4"
+    bitwidth: 32
+  }
+  params {
+    id: 2
+    name: "port"
+    bitwidth: 9
+  }
+}
+actions {
+  preamble {
+    id: 30379233
+    name: "readbuffer"
+    alias: "readbuffer"
+  }
+}
+actions {
+  preamble {
+    id: 28066193
+    name: "setpriolow"
+    alias: "setpriolow"
+  }
+}
+actions {
+  preamble {
+    id: 23687164
+    name: "setpriohigh"
+    alias: "setpriohigh"
+  }
+}
+actions {
+  preamble {
+    id: 21167566
+    name: "decreasereg"
+    alias: "decreasereg"
+  }
+}
+actions {
+  preamble {
+    id: 31479387
+    name: "cont"
+    alias: "cont"
+  }
+}
+actions {
+  preamble {
+    id: 31165400
+    name: "rewrite_mac"
+    alias: "rewrite_mac"
+  }
+  params {
+    id: 1
+    name: "smac"
+    bitwidth: 48
+  }
+}
+registers {
+  preamble {
+    id: 378163215
+    name: "buffersense"
+    alias: "buffersense"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 16
+      }
+    }
+  }
+  size: 4
+}
+type_info {
+}
